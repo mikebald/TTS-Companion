@@ -21,6 +21,7 @@ namespace TTS_Companion
     {
         private readonly SpeechSynthesizer _speechSynthesizer = new SpeechSynthesizer();
         private LowLevelKeyboardListener _listener;
+        private bool _currentKeyPress;
 
         public MainWindow()
         {
@@ -31,9 +32,9 @@ namespace TTS_Companion
 
         private void InitializeKeyboardListener()
         {
+            _currentKeyPress = false;
             _listener = new LowLevelKeyboardListener();
             _listener.OnKeyPressed += GlobalKeyboard_OnKeyPressed;
-
             _listener.HookKeyboard();
         }
 
@@ -46,31 +47,36 @@ namespace TTS_Companion
 
         private void GlobalKeyboard_OnKeyPressed(object sender, KeyPressedArgs e)
         {
-            if(e.KeyPressed == System.Windows.Input.Key.Up)
+            if (!_currentKeyPress)
             {
-                Speak("Yes");
-            }
+                _currentKeyPress = true;
+                if (e.KeyPressed == System.Windows.Input.Key.Up)
+                {
+                    Speak("Yes");
+                }
 
-            if (e.KeyPressed == System.Windows.Input.Key.Down)
-            {
-                Speak("No");
-            }
+                if (e.KeyPressed == System.Windows.Input.Key.Down)
+                {
+                    Speak("No");
+                }
 
-            if (e.KeyPressed == System.Windows.Input.Key.Left)
-            {
-                Speak("Being Ganked");
-            }
+                if (e.KeyPressed == System.Windows.Input.Key.Left)
+                {
+                    Speak("Being Ganked");
+                }
 
-            if (e.KeyPressed == System.Windows.Input.Key.Right)
-            {
-                Speak("Last district");
-            }
+                if (e.KeyPressed == System.Windows.Input.Key.Right)
+                {
+                    Speak("Last district");
+                }
 
-            /*
-            if(e.KeyPressed == System.Windows.Input.Key.Oem5) // Backslash
-            {
-                Keyboard.Focus(txtSpeech);
-            }*/
+                /*
+                if(e.KeyPressed == System.Windows.Input.Key.Oem5) // Backslash
+                {
+                    Keyboard.Focus(txtSpeech);
+                }*/
+                _currentKeyPress = false;
+            }
         }
 
         private void SpeakString_OnClick(object sender, RoutedEventArgs e)
