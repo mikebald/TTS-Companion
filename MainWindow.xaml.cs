@@ -133,6 +133,7 @@ namespace TTS_Companion
         private void SpeakString_OnClick(object sender, RoutedEventArgs e)
         {
             GoogleSay(txtSpeech.Text);
+            txtSpeech.Text = string.Empty;
         }
 
         private void txtSpeech_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
@@ -140,13 +141,17 @@ namespace TTS_Companion
             if(e.Key == System.Windows.Input.Key.Enter)
             {
                 SpeakString_OnClick(null, null);
-                ((TextBox)sender).Text = string.Empty;
+                
             }
         }
 
         private void Speak_Content_OnClick(object sender, RoutedEventArgs e)
         {
-            GoogleSay(((Button)sender).Content.ToString());
+            string message = ((Button)sender).Content.ToString();
+            if (message != string.Empty)
+            {
+                GoogleSay(message);
+            }
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
