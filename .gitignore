@@ -8,3 +8,35 @@ obj/Debug/MainWindow.g.cs
 obj/Debug/MainWindow.g.i.cs
 obj/Debug/TTS Companion.csprojAssemblyReference.cache
 obj/Debug/TTS_Companion_MarkupCompile.cache
+*.dll
+*.pdb
+*.dylib
+*.so
+*.cache
+*.CopyComplete
+*.exe
+*.resources
+bin/Debug/CSCore.xml
+bin/Debug/Google.Api.CommonProtos.xml
+bin/Debug/Google.Api.Gax.Grpc.GrpcCore.xml
+bin/Debug/Google.Api.Gax.Grpc.xml
+bin/Debug/Google.Api.Gax.xml
+bin/Debug/Google.Apis.Auth.xml
+bin/Debug/Google.Apis.Core.xml
+bin/Debug/Google.Apis.xml
+bin/Debug/Google.Cloud.TextToSpeech.V1.xml
+bin/Debug/Google.Protobuf.xml
+bin/Debug/Grpc.Auth.xml
+bin/Debug/Grpc.Core.Api.xml
+bin/Debug/Grpc.Core.xml
+bin/Debug/Microsoft.Bcl.AsyncInterfaces.xml
+bin/Debug/Newtonsoft.Json.xml
+bin/Debug/System.Buffers.xml
+bin/Debug/System.Memory.xml
+bin/Debug/System.Numerics.Vectors.xml
+bin/Debug/System.Runtime.CompilerServices.Unsafe.xml
+bin/Debug/System.Threading.Tasks.Extensions.xml
+bin/Debug/TTS_Companion.exe.config
+obj/Debug/TTS Companion.csproj.FileListAbsolute.txt
+obj/Debug/TTS_Companion.exe.config
+obj/Debug/TTS_Companion_Content.g.i.cs
