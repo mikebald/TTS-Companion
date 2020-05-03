@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="TTS Companion - by mikebald" Height="255" Width="375" WindowStyle="ToolWindow" ResizeMode="NoResize" Closing="Window_Closing">
+        Title="TTS Companion - by mikebald" Height="255" Width="380" WindowStyle="ToolWindow" ResizeMode="NoResize" Closing="Window_Closing">
 
     <Grid Margin="10" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
 
@@ -22,7 +22,7 @@
             <ColumnDefinition Width="Auto" MinWidth="79"/>
             <ColumnDefinition Width="Auto" MinWidth="70"/>
             <ColumnDefinition Width="Auto" MinWidth="66"/>
-            <ColumnDefinition Width="Auto" MinWidth="132"/>
+            <ColumnDefinition Width="Auto" MinWidth="130"/>
         </Grid.ColumnDefinitions>
 
         <Border Grid.Row="3" Grid.ColumnSpan="4" BorderBrush="Black" BorderThickness="0,3,0,0" Background="{x:Null}" />

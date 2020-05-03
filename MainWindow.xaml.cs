@@ -65,7 +65,7 @@ namespace TTS_Companion
             _audioConfig = new AudioConfig
             {
                 AudioEncoding = Google.Cloud.TextToSpeech.V1.AudioEncoding.Mp3,
-                Pitch = 0.0
+                Pitch = -5.0
             };
 
         }
