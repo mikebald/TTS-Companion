@@ -42,3 +42,4 @@ obj/Debug/TTS_Companion.g.resources
 obj/Debug/TTS_Companion.Properties.Resources.resources
 obj/Debug/TTS_Companion_Content.g.cs
 obj/Debug/TTS_Companion_Content.g.i.cs
+bin/Debug/tts_settings.xml

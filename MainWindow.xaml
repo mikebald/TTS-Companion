@@ -4,136 +4,142 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="TTS Companion - by mikebald" Height="255" Width="380" WindowStyle="ToolWindow" ResizeMode="NoResize" Closing="Window_Closing">
+        Title="TTS Companion - by mikebald" Height="275" Width="380" ResizeMode="NoResize" Closing="Window_Closing" Icon="app.ico" SizeToContent="WidthAndHeight">
 
-    <Grid Margin="10" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="_Playback Device" Name="menuPlayback">
+            </MenuItem>
+            <MenuItem Header="_Keybind Enabled" Name="menuKeybindEnabled" Click="menuKeybindEnable" />
+        </Menu>
 
-        <Grid.RowDefinitions>
-            <RowDefinition Height="55"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
+        <Grid Margin="10" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
 
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" MinWidth="79"/>
-            <ColumnDefinition Width="Auto" MinWidth="70"/>
-            <ColumnDefinition Width="Auto" MinWidth="66"/>
-            <ColumnDefinition Width="Auto" MinWidth="130"/>
-        </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="55"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
 
-        <Border Grid.Row="3" Grid.ColumnSpan="4" BorderBrush="Black" BorderThickness="0,3,0,0" Background="{x:Null}" />
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" MinWidth="79"/>
+                <ColumnDefinition Width="Auto" MinWidth="70"/>
+                <ColumnDefinition Width="Auto" MinWidth="66"/>
+                <ColumnDefinition Width="Auto" MinWidth="130"/>
+            </Grid.ColumnDefinitions>
 
-        <Button Grid.Row="0" Grid.Column="0"
+            <Border Grid.Row="3" Grid.ColumnSpan="4" BorderBrush="Black" BorderThickness="0,3,0,0" Background="{x:Null}" />
+
+            <Button Grid.Row="0" Grid.Column="0"
                 Margin="2" Padding="3"
                 Content="Speak"
                 Click="SpeakString_OnClick"/>
 
-        <TextBox x:Name="txtSpeech" Grid.ColumnSpan="3" Grid.Row="0" Grid.Column="1" Height="52" Margin="3,3,3,0" TextWrapping="WrapWithOverflow" VerticalAlignment="Top" KeyDown="txtSpeech_KeyDown"/>
+            <TextBox x:Name="txtSpeech" Grid.ColumnSpan="3" Grid.Row="0" Grid.Column="1" Width="260" Height="52" Margin="3,3,3,0" TextWrapping="WrapWithOverflow" VerticalAlignment="Top" KeyDown="txtSpeech_KeyDown"/>
 
-        <Button Grid.Row="1" Grid.Column="0"
+            <Button Grid.Row="1" Grid.Column="0"
                 Margin="2,2,3,2" Padding="3"
                 Content="Yes"
                 Click="Speak_Content_OnClick"/>
 
-        <Button Grid.Row="1" Grid.Column="1"
+            <Button Grid.Row="1" Grid.Column="1"
                 Margin="3,2" Padding="3"
                 Content="Thanks"
                 Click="Speak_Content_OnClick"/>
 
-        <Button Grid.Row="1" Grid.Column="2"
+            <Button Grid.Row="1" Grid.Column="2"
                 Margin="3,2" Padding="3"
                 Content="Sorry"
                 Click="Speak_Content_OnClick"/>
 
-        <Button Grid.Row="1" Grid.Column="3"
+            <Button Grid.Row="1" Grid.Column="3"
                 Margin="3,2,2,2" Padding="3"
                 Content="How's everyone?"
                 Click="Speak_Content_OnClick"/>
 
-        <Button Grid.Row="2" Grid.Column="0"
+            <Button Grid.Row="2" Grid.Column="0"
                 Margin="2,2,3,2" Padding="3"
                 Content="No"
                 Click="Speak_Content_OnClick"/>
 
-        <Button Grid.Row="2" Grid.Column="1"
+            <Button Grid.Row="2" Grid.Column="1"
                 Margin="3,2" Padding="3"
                 Content="Please"
                 Click="Speak_Content_OnClick"/>
 
-        <Button Grid.Row="2" Grid.Column="2"
+            <Button Grid.Row="2" Grid.Column="2"
                 Margin="3,2" Padding="3"
                 Content="Hello"
                 Click="Speak_Content_OnClick"/>
 
-        <Button Grid.Row="2" Grid.Column="3"
+            <Button Grid.Row="2" Grid.Column="3"
                 Margin="3,2,2,2" Padding="3"
                 Content="Good Evening"
                 Click="Speak_Content_OnClick"/>
 
-        <Button Grid.Row="4" Grid.Column="0"
+            <Button Grid.Row="4" Grid.Column="0"
                 Margin="2,2,3,2" Padding="3"
                 Content="I'm Good"
                 Click="Speak_Content_OnClick"/>
 
-        <Button Grid.Row="4" Grid.Column="1"
+            <Button Grid.Row="4" Grid.Column="1"
                 Margin="3,2" Padding="3"
                 Content="Ha Ha"
                 Click="Speak_Content_OnClick"/>
 
-        <Button Grid.Row="4" Grid.Column="2"
+            <Button Grid.Row="4" Grid.Column="2"
                 Margin="3,2" Padding="3"
                 Content=""
                 Click="Speak_Content_OnClick"/>
 
-        <Button Grid.Row="4" Grid.Column="3"
+            <Button Grid.Row="4" Grid.Column="3"
                 Margin="3,2,2,2" Padding="3"
                 Content="Share dailies Please"
                 Click="Speak_Content_OnClick"/>
 
-        <Button Grid.Row="5" Grid.Column="0"
+            <Button Grid.Row="5" Grid.Column="0"
                 Margin="2,2,3,2" Padding="3"
                 Content="In Combat"
                 Click="Speak_Content_OnClick"/>
 
-        <Button Grid.Row="5" Grid.Column="1"
+            <Button Grid.Row="5" Grid.Column="1"
                 Margin="3,2" Padding="3"
                 Content="Very funny"
                 Click="Speak_Content_OnClick"/>
 
-        <Button Grid.Row="5" Grid.Column="2"
+            <Button Grid.Row="5" Grid.Column="2"
                 Margin="3,2" Padding="3"
-                Content="Players"
+                Content=""
                 Click="Speak_Content_OnClick"/>
 
-        <Button Grid.Row="5" Grid.Column="3"
+            <Button Grid.Row="5" Grid.Column="3"
                 Margin="3,2,2,2" Padding="3"
                 Content="Share dk's please"
                 Click="Speak_Content_OnClick"/>
 
-        <Button Grid.Row="6" Grid.Column="0"
+            <Button Grid.Row="6" Grid.Column="0"
                 Margin="2,2,3,2" Padding="3"
                 Content="Can't Mount"
                 Click="Speak_Content_OnClick"/>
 
-        <Button Grid.Row="6" Grid.Column="1"
+            <Button Grid.Row="6" Grid.Column="1"
                 Margin="3,2" Padding="3"
                 Content=""
                 Click="Speak_Content_OnClick"/>
 
-        <Button Grid.Row="6" Grid.Column="2"
+            <Button Grid.Row="6" Grid.Column="2"
                 Margin="3,2" Padding="3"
                 Content=""
                 Click="Speak_Content_OnClick"/>
 
-        <Button Grid.Row="6" Grid.Column="3"
+            <Button Grid.Row="6" Grid.Column="3"
                 Margin="3,2,2,2" Padding="3"
                 Content="Share players please"
                 Click="Speak_Content_OnClick"/>
-
-    </Grid>
-
+        </Grid>
+    </DockPanel>
 </Window>

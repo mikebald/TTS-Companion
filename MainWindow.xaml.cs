@@ -12,7 +12,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using Google.Cloud.TextToSpeech.V1;
-
+using CSCore.CoreAudioAPI;
 
 namespace TTS_Companion
 {
@@ -24,7 +24,9 @@ namespace TTS_Companion
         private readonly SpeechSynthesizer _speechSynthesizer = new SpeechSynthesizer();
         private LowLevelKeyboardListener _listener;
         private bool _currentKeyPress;
+        private int _waveOutDeviceID;
 
+        TTSSettings _settings;
         TextToSpeechClient _client;
         VoiceSelectionParams _voiceParms;
         AudioConfig _audioConfig;
@@ -33,8 +35,72 @@ namespace TTS_Companion
         {
             InitializeComponent();
             InitializeGoogleEnvironmentVariable();
+            InitializeSettings();
             InitializeVoice();
+            InitializePlaybackDevices();
             InitializeKeyboardListener();
+        }
+
+        public void InitializeSettings()
+        {
+            _waveOutDeviceID = 0;
+            _settings = new TTSSettings();
+            try
+            {
+                _settings = TTSSettings.Read();
+                _waveOutDeviceID = _settings.AudioDeviceID;
+                SetKeybindsEnabledBold();
+            }
+            catch { }
+        }
+
+        public void InitializePlaybackDevices()
+        {
+            foreach(WaveOutDevice waveOutDevice in WaveOutDevice.EnumerateDevices())
+            {
+                MenuItem item = new MenuItem()
+                {
+                    Header = waveOutDevice.Name,
+                    ToolTip = waveOutDevice.DeviceId
+
+                };
+                item.Click += new RoutedEventHandler(menu_DeviceList_Click);
+
+                menuPlayback.Items.Add(item);
+            }
+        }
+
+        private void menu_DeviceList_Click(Object sender, RoutedEventArgs e)
+        {
+            MenuItem thisItem = (MenuItem)sender;
+            _waveOutDeviceID = (int)thisItem.ToolTip;
+            _settings.AudioDeviceFriendlyName = thisItem.Header.ToString();
+            _settings.AudioDeviceID = (int)thisItem.ToolTip;
+            _settings.Save();
+        }
+
+        private void menuKeybindEnable(Object sender, RoutedEventArgs e)
+        {
+            if(_settings.KeybindsEnabled)
+            {
+                _settings.KeybindsEnabled = false;
+            } else
+            {
+                _settings.KeybindsEnabled = true;
+            }
+            SetKeybindsEnabledBold();
+            _settings.Save();
+        }
+
+        private void SetKeybindsEnabledBold()
+        {
+            if(_settings.KeybindsEnabled)
+            {
+                menuKeybindEnabled.FontWeight = FontWeights.UltraBold;
+            } else
+            {
+                menuKeybindEnabled.FontWeight = FontWeights.Normal;
+            }
         }
 
         private void InitializeGoogleEnvironmentVariable()
@@ -86,7 +152,7 @@ namespace TTS_Companion
 
                 response.AudioContent.WriteTo(stream);
                 
-                using (var waveOut = new WaveOut { Device = new WaveOutDevice(2) })
+                using (var waveOut = new WaveOut { Device = new WaveOutDevice(_waveOutDeviceID) })
                 using (var waveSource = new MediaFoundationDecoder(stream))
                 {
                     waveOut.Initialize(waveSource);
@@ -98,7 +164,7 @@ namespace TTS_Companion
 
         private void GlobalKeyboard_OnKeyPressed(object sender, KeyPressedArgs e)
         {
-            if (!_currentKeyPress)
+            if (!_currentKeyPress && _settings.KeybindsEnabled)
             {
                 _currentKeyPress = true;
                 if (e.KeyPressed == System.Windows.Input.Key.Up)
@@ -113,7 +179,7 @@ namespace TTS_Companion
 
                 if (e.KeyPressed == System.Windows.Input.Key.Left)
                 {
-                    GoogleSay("I am Being Ganked");
+                    GoogleSay("Being Ganked; need help");
                 }
 
                 if (e.KeyPressed == System.Windows.Input.Key.Right)
@@ -141,7 +207,11 @@ namespace TTS_Companion
             if(e.Key == System.Windows.Input.Key.Enter)
             {
                 SpeakString_OnClick(null, null);
-                
+            }
+
+            if(e.Key == System.Windows.Input.Key.Escape)
+            {
+                txtSpeech.Text = string.Empty;
             }
         }
 
@@ -156,7 +226,11 @@ namespace TTS_Companion
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            _listener.UnHookKeyboard();
+            try
+            {
+                _listener.UnHookKeyboard();
+            }
+            catch { }
         }
     }
 }
