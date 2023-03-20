@@ -36,7 +36,7 @@ namespace TTS_Companion
             InitializeComponent();
             InitializeGoogleEnvironmentVariable();
             InitializeSettings();
-            InitializeVoice();
+            InitializeDefaultVoice();
             InitializePlaybackDevices();
             InitializeKeyboardListener();
         }
@@ -92,6 +92,17 @@ namespace TTS_Companion
             _settings.Save();
         }
 
+        private void menu_DefaultVoice_Click(Object sender, RoutedEventArgs e)
+        {
+            InitializeDefaultVoice();
+        }
+
+        private void menu_OtherVoice_Click(Object sender, RoutedEventArgs e)
+        {
+            MenuItem thisItem = (MenuItem)sender;
+            InitiaizeAlternativeVoice(thisItem.Header.ToString());
+        }
+
         private void SetKeybindsEnabledBold()
         {
             if(_settings.KeybindsEnabled)
@@ -116,7 +127,7 @@ namespace TTS_Companion
             _listener.HookKeyboard();
         }
 
-        private void InitializeVoice()
+        private void InitializeDefaultVoice()
         {
             _client = TextToSpeechClient.Create();
 
@@ -132,6 +143,66 @@ namespace TTS_Companion
             {
                 AudioEncoding = Google.Cloud.TextToSpeech.V1.AudioEncoding.Mp3,
                 Pitch = -5.0
+            };
+        }
+
+        private void InitiaizeAlternativeVoice(string Tooltip)
+        {
+            _client = TextToSpeechClient.Create();
+
+            switch (Tooltip)
+            {
+
+                case "Asian - F":
+                    _voiceParms = new VoiceSelectionParams
+                    {
+                        LanguageCode = "ja-JP",
+                        SsmlGender = SsmlVoiceGender.Female
+                    };
+                    break;
+                case "Asian - M":
+                    _voiceParms = new VoiceSelectionParams
+                    {
+                        LanguageCode = "ja-JP",
+                        SsmlGender = SsmlVoiceGender.Male
+                    };
+                    break;
+                case "Aussie - F":
+                    _voiceParms = new VoiceSelectionParams
+                    {
+                        LanguageCode = "en-AU",
+                        SsmlGender = SsmlVoiceGender.Female
+                    };
+                    break;
+                case "Aussie - M":
+                    _voiceParms = new VoiceSelectionParams
+                    {
+                        LanguageCode = "en-AU",
+                        SsmlGender = SsmlVoiceGender.Male
+                    };
+                    break;
+                case "British - F":
+                    _voiceParms = new VoiceSelectionParams
+                    {
+                        LanguageCode = "en-GB",
+                        SsmlGender = SsmlVoiceGender.Female
+                    };
+                    break;
+                case "British - M":
+                    _voiceParms = new VoiceSelectionParams
+                    {
+                        LanguageCode = "en-GB",
+                        SsmlGender = SsmlVoiceGender.Male
+                    };
+                    break;
+
+            }
+
+            // Specify the type of audio file.
+            _audioConfig = new AudioConfig
+            {
+                AudioEncoding = Google.Cloud.TextToSpeech.V1.AudioEncoding.Mp3,
+                Pitch = 0
             };
 
         }
@@ -179,12 +250,12 @@ namespace TTS_Companion
 
                 if (e.KeyPressed == System.Windows.Input.Key.Left)
                 {
-                    GoogleSay("Being Ganked; need help");
+                    GoogleSay("My Barrier");
                 }
 
                 if (e.KeyPressed == System.Windows.Input.Key.Right)
                 {
-                    GoogleSay("Last district");
+                    GoogleSay("Door is hot");
                 }
 
                 /*
